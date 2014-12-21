@@ -5,26 +5,29 @@
 }
 
 <h2 class="col-xs-12">Movimientos de Caja</h2>
-<h3 class="col-xs-12">Filtros</h3>
-<div class="col-xs-6">
-    <form class="form-horizontal">
-        <fieldset>
-            <div class="form-group">
-                <label class="col-xs-2 control-label">Caja</label>
-                <div class="col-xs-6">@Html.DropDownList("caja", @Model.Cajas, new { @class = "form-control"})</div>
+<div id="filtros">
+    <h3 class="col-xs-12">Filtros</h3>
+    <div class="col-xs-6">
+        <form class="form-horizontal">
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">Caja</label>
+                    <div class="col-xs-6">@Html.DropDownList("caja", @Model.Cajas, new { @class = "form-control" })</div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">Periodo</label>
+                    <div class="col-xs-4">@Html.TextBox("fechaDesde", DateTime.Today.AddMonths(-1).ToShortDateString(), new { @class = "fecha form-control" })</div>
+                    <label class="col-lg-1 control-label"> - </label>
+                    <div class="col-xs-4">@Html.TextBox("fechaHasta", DateTime.Today.ToShortDateString(), new { @class = "fecha form-control" })</div>
+                </div>
+            </fieldset>
+            <div class="col-xs-12 text-right">
+                <button id="consultar" class="btn btn-primary">Consultar</button>
             </div>
-            <div class="form-group">
-                <label class="col-xs-2 control-label">Periodo</label>
-                <div class="col-xs-4">@Html.TextBox("fechaDesde", DateTime.Today.AddMonths(-1).ToShortDateString(), new { @class = "fecha form-control" })</div>
-                <label class="col-lg-1 control-label"> - </label>
-                <div class="col-xs-4">@Html.TextBox("fechaHasta", DateTime.Today.ToShortDateString(), new { @class = "fecha form-control" })</div>
-            </div>
-        </fieldset>
-        <div class="col-xs-12 text-right">
-            <button id="consultar" class="btn btn-primary">Consultar</button>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
+<button class="btn btn-primary col-xs-12" style="display: none" id="btnFiltrar">Filtrar <span class="glyphicon glyphicon-arrow-down"></span></button>
 
 <h3 class="col-xs-12">Movimientos</h3>
 
@@ -41,7 +44,7 @@
     </thead>
     <tbody></tbody>
 </table>
-<div class="botonera col-xs-12 text-right">
+<div class="col-xs-12 text-right">
     <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
 </div>
 <script>
@@ -58,8 +61,16 @@
                 var fechaHasta = $("#fechaHasta").val().replace(/\//g, "-");
                 $("#movimientos").find("tbody").load("Movimientos/Movimientos?idCaja=" + idCaja + "&fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta, function() {
                     $("#movimientos").fadeIn();
+                    $("#filtros").slideUp();
+                    $("#btnFiltrar").fadeIn();
                 });
             });
+        });
+
+        $("#btnFiltrar").on("click", function(event) {
+            event.preventDefault();
+            $(this).fadeOut();
+            $("#filtros").slideDown();
         });
     });
 </script>
