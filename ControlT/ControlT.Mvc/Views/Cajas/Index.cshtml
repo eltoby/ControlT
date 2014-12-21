@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ControlT.EF.Caja>
+@{
+    ViewBag.Title = "Cajas";
+}
+
+<h2>Cajas</h2>
+
+<div class="col-md-2"></div>
+<div class="col-md-5">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                
+                <th>Caja</th>                    
+                <th>Saldo $</th>
+                <th>Saldo U$S</th>
+            </tr>
+        </thead>
+            
+        <tbody>
+            @foreach (var caja in Model)
+            {
+                Html.RenderPartial("FilaCaja", caja);
+            }
+        </tbody>
+    </table>
+</div>

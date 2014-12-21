@@ -1,0 +1,32 @@
+﻿@model ControlT.Mvc.Models.NuevoMovimientoModel
+
+@{
+    ViewBag.Title = "Nuevo Movimiento";
+}
+
+<h2>Nuevo Movimiento</h2>
+
+<form>
+    <div class="col-md-3">
+        @Html.RadioButtonFor(x => x.TipoMovimiento, "Ingreso", false)
+        <label for="rbtIngreso">Ingreso</label>
+    </div>
+    <div class="col-md-3">
+        @Html.RadioButtonFor(x => x.TipoMovimiento, "Egreso", true)
+        <label for="rbtEgreso">Egreso</label>
+    </div>
+    <div class="col-md-6"></div>
+    
+    <div class="col-md-3">
+        <label for="fecha">Fecha:</label>
+        <input type="date" id="fecha"/>
+    </div>
+    <div class="col-md-9"></div>
+    
+    <div class="col-md-3">
+        <label for="caja">Caja</label>
+        @*Html.DropDownList("Cajas");*@
+    </div>
+    
+    <input type="submit" value="Guardar"/>
+</form>

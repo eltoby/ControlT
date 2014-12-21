@@ -1,0 +1,13 @@
+﻿@model IEnumerable<ControlT.Mvc.Models.MovimientoModel>
+ 
+@foreach(var movimiento in @Model)
+{
+    <tr class="@movimiento.CssClass">
+        <td>@movimiento.Fecha.ToShortDateString()</td>
+        <td>@movimiento.Concepto</td>
+        <td class="text-right">@movimiento.Importe.ToString("N2")</td>
+        <td class="text-right">@movimiento.Saldo.ToString("N2")</td>
+        <td class="text-center"><button class="btn btn-info"><span class="glyphicon glyphicon-edit"></span></button></td>
+        <td class="text-center"><button class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button></td>
+    </tr>
+}

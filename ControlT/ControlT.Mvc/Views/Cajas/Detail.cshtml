@@ -1,0 +1,24 @@
+﻿@model ControlT.Mvc.Models.CajaModel
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>Detalle Caja @Model.Nombre</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Fecha</th>
+            <th>Concepto</th>
+            <th>Importe</th>
+            <th>Saldo</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        @foreach (var movimiento in @Model.UltimosMovimientos.OrderByDescending(x => x.Fecha))
+        {
+            Html.RenderPartial("FilaMovimiento", movimiento);
+        }
+    </tbody>
+</table>

@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlT.Mvc", "ControlT.Mvc\ControlT.Mvc.csproj", "{EEE91436-8527-4E9A-AD0F-1EE63F8EE985}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlT.Mvc.Tests", "ControlT.Mvc.Tests\ControlT.Mvc.Tests.csproj", "{062116A0-92E5-4A5F-9009-EBB7C51A606C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlT.EF", "ControlT.EF\ControlT.EF.csproj", "{AD6C9B84-8A7E-4D02-868A-F0005A915E39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EEE91436-8527-4E9A-AD0F-1EE63F8EE985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEE91436-8527-4E9A-AD0F-1EE63F8EE985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEE91436-8527-4E9A-AD0F-1EE63F8EE985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEE91436-8527-4E9A-AD0F-1EE63F8EE985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{062116A0-92E5-4A5F-9009-EBB7C51A606C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{062116A0-92E5-4A5F-9009-EBB7C51A606C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{062116A0-92E5-4A5F-9009-EBB7C51A606C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{062116A0-92E5-4A5F-9009-EBB7C51A606C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD6C9B84-8A7E-4D02-868A-F0005A915E39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD6C9B84-8A7E-4D02-868A-F0005A915E39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD6C9B84-8A7E-4D02-868A-F0005A915E39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD6C9B84-8A7E-4D02-868A-F0005A915E39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
