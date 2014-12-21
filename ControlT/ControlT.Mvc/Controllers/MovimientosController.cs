@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Web.Mvc;
     using EF;
@@ -21,7 +22,7 @@
                 var li = new SelectListItem
                 {
                     Text = caja.Nombre,
-                    Value = caja.CajaID.ToString(),
+                    Value = caja.CajaID.ToString(CultureInfo.InvariantCulture),
                     Selected = selected
                 };
                 cajas.Add(li);
@@ -35,14 +36,22 @@
         public ActionResult Movimientos(int idCaja, string fechaDesde, string fechaHasta)
         {
             var uow = new ControlTContext();
-
             var fecDesde = this.GetFecha(fechaDesde);
             var fecHasta = this.GetFecha(fechaHasta);
-            var movimientos = uow.Movimientos.Where(x => x.Caja.CajaID == idCaja && x.Fecha >= fecDesde && x.Fecha <= fecHasta);
             var movimientosModel = new List<MovimientoModel>();
 
-            var saldo = 0M;
-            
+            var movimientosAnteriores = uow.Movimientos.Where(x => x.Caja.CajaID == idCaja && x.Fecha < fecDesde);
+            var saldoAnterior = movimientosAnteriores.Any() ? movimientosAnteriores.Sum(x => x.Importe) : 0M;
+
+            if (saldoAnterior > 0)
+            {
+                var movimientoModel = new MovimientoModel(fecDesde.AddDays(-1), saldoAnterior);
+                movimientosModel.Add(movimientoModel);
+            }
+
+            var movimientos = uow.Movimientos.Where(x => x.Caja.CajaID == idCaja && x.Fecha >= fecDesde && x.Fecha <= fecHasta);
+
+            var saldo = saldoAnterior;
             foreach (var movimiento in movimientos)
             {
                 saldo += movimiento.Importe;

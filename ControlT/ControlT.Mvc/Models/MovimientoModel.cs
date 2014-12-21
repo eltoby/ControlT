@@ -12,6 +12,17 @@
             this.Importe = movimiento.Importe;
             this.Saldo = saldo;
             this.EsExtraordinario = movimiento.EsExtraordinario;
+            this.EsEditable = true;
+        }
+
+        public MovimientoModel(DateTime fecha, decimal saldoAnterior)
+        {
+            this.Fecha = fecha;
+            this.Concepto = "Saldo Anterior";
+            this.Importe = saldoAnterior;
+            this.Saldo = saldoAnterior;
+            this.EsExtraordinario = false;
+            this.EsEditable = false;
         }
 
         public DateTime Fecha { get; set; }
@@ -23,6 +34,8 @@
         public decimal Saldo { get; set; }
 
         public bool EsExtraordinario { get; set; }
+
+        public bool EsEditable { get; set; }
 
         public string CssClass
         {
