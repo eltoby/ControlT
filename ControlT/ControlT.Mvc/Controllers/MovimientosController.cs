@@ -7,6 +7,7 @@
     using System.Web.Mvc;
     using EF;
     using Models;
+    using Utils;
 
     public class MovimientosController : Controller
     {
@@ -36,28 +37,18 @@
         public ActionResult Movimientos(int idCaja, string fechaDesde, string fechaHasta)
         {
             var uow = new ControlTContext();
-            var fecDesde = this.GetFecha(fechaDesde);
-            var fecHasta = this.GetFecha(fechaHasta);
+            var fecDesde = fechaDesde.ToDate();
+            var fecHasta = fechaHasta.ToDate();
+
             var movimientosModel = new List<MovimientoModel>();
 
             var movimientosAnteriores = uow.Movimientos.Where(x => x.Caja.CajaID == idCaja && x.Fecha < fecDesde);
             var saldoAnterior = movimientosAnteriores.Any() ? movimientosAnteriores.Sum(x => x.Importe) : 0M;
 
-            if (saldoAnterior > 0)
-            {
-                var movimientoModel = new MovimientoModel(fecDesde.AddDays(-1), saldoAnterior);
-                movimientosModel.Add(movimientoModel);
-            }
-
+            AddLineaSaldoAnteriorSiCorresponde(saldoAnterior, fecDesde, movimientosModel);
+          
             var movimientos = uow.Movimientos.Where(x => x.Caja.CajaID == idCaja && x.Fecha >= fecDesde && x.Fecha <= fecHasta);
-
-            var saldo = saldoAnterior;
-            foreach (var movimiento in movimientos)
-            {
-                saldo += movimiento.Importe;
-                var movimientoModel = new MovimientoModel(movimiento, saldo);
-                movimientosModel.Add(movimientoModel);
-            }
+            AddLineas(movimientos, saldoAnterior, movimientosModel);
 
             return this.PartialView(movimientosModel);
         }
@@ -67,10 +58,20 @@
             return this.View();
         }
 
-        private DateTime GetFecha(string fecha)
+        private static void AddLineaSaldoAnteriorSiCorresponde(decimal saldoAnterior, DateTime fecDesde, ICollection<MovimientoModel> movimientosModel)
         {
-            var partes = fecha.Split('-');
-            return new DateTime(int.Parse(partes[2]), int.Parse(partes[1]), int.Parse(partes[0]));
+            if (saldoAnterior <= 0) return;
+            var movimientoModel = new MovimientoModel(fecDesde.AddDays(-1), saldoAnterior);
+            movimientosModel.Add(movimientoModel);
+        }
+        private static void AddLineas(IEnumerable<Movimiento> movimientos, decimal saldo, ICollection<MovimientoModel> movimientosModel)
+        {
+            foreach (var movimiento in movimientos)
+            {
+                saldo += movimiento.Importe;
+                var movimientoModel = new MovimientoModel(movimiento, saldo);
+                movimientosModel.Add(movimientoModel);
+            }
         }
     }
 }

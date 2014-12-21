@@ -1029,6 +1029,10 @@
       <Project>{AD6C9B84-8A7E-4D02-868A-F0005A915E39}</Project>
       <Name>ControlT.EF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ControlT.Utils\ControlT.Utils.csproj">
+      <Project>{27A188EB-B7DB-46AD-B721-A91E004A2E29}</Project>
+      <Name>ControlT.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
