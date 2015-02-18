@@ -4,6 +4,10 @@
     ViewBag.Title = "Index";
 }
 
+<div id='dialogDiv' class='modal'>
+    <div class="modal-dialog" id='dialogContent'></div>
+</div>
+
 <h2 class="col-xs-12">Movimientos de Caja</h2>
 <div id="filtros">
     <h3 class="col-xs-12">Filtros</h3>
@@ -45,7 +49,7 @@
     <tbody></tbody>
 </table>
 <div class="col-xs-12 text-right">
-    <button class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></button>
+    <a href="Movimientos/Create" id="btnCreate" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></a>
 </div>
 <script>
     $(document).ready(function () {        
@@ -72,5 +76,37 @@
             $(this).fadeOut();
             $("#filtros").slideDown();
         });
+        
+        $('#btnCreate').click(function () {
+            $('#dialogContent').load(this.href, function () {
+                $('#dialogDiv').modal({
+                    backdrop: 'static',
+                    keyboard: true
+                }, 'show');
+                bindForm(this);
+            });
+            return false;
+        });
+        
+        function bindForm(dialog) {
+            $('form', dialog).submit(function () {
+                $.ajax({
+                    url: this.action,
+                    type: this.method,
+                    data: $(this).serialize(),
+                    success: function (result) {
+                        if (result.success) {
+                            $('#dialogDiv').modal('hide');
+                            // Refresh:
+                            // location.reload();
+                        } else {
+                            $('#dialogContent').html(result);
+                            bindForm();
+                        }
+                    }
+                });
+                return false;
+            });
+        }
     });
 </script>

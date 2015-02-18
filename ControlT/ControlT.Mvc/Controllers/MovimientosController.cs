@@ -55,7 +55,7 @@
 
         public ActionResult Create()
         {
-            return this.View();
+            return this.PartialView();
         }
 
         private static void AddLineaSaldoAnteriorSiCorresponde(decimal saldoAnterior, DateTime fecDesde, ICollection<MovimientoModel> movimientosModel)
