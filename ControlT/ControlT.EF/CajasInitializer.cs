@@ -14,7 +14,8 @@
                 Concepto = "Prueba",
                 EsExtraordinario = false,
                 Fecha = DateTime.Today,
-                Importe = 1000M
+                Importe = 1000M,
+                CajaID = 1
             };
 
             var movimientoExtraordinario = new Movimiento
@@ -22,7 +23,8 @@
                 Concepto = "Movimiento Extraordinario",
                 EsExtraordinario = true,
                 Fecha = DateTime.Today,
-                Importe = 2000M
+                Importe = 2000M,
+                CajaID = 1
             };
 
             caja.Movimientos = new Collection<Movimiento> { movimiento, movimientoExtraordinario };

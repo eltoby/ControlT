@@ -57,20 +57,15 @@
 
         $("#movimientos").hide();
         
+        cargarGrilla();
+
         $("#consultar").on("click", function(event) {
             event.preventDefault();
-            $("#movimientos").fadeOut(function() {
-                var idCaja = $("#caja").val();
-                var fechaDesde = $("#fechaDesde").val().replace(/\//g, "-");
-                var fechaHasta = $("#fechaHasta").val().replace(/\//g, "-");
-                $("#movimientos").find("tbody").load("Movimientos/Movimientos?idCaja=" + idCaja + "&fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta, function() {
-                    $("#movimientos").fadeIn();
-                    $("#filtros").slideUp();
-                    $("#btnFiltrar").fadeIn();
-                });
+            $("#movimientos").fadeOut(function () {
+                cargarGrilla();
             });
         });
-
+        
         $("#btnFiltrar").on("click", function(event) {
             event.preventDefault();
             $(this).fadeOut();
@@ -88,25 +83,37 @@
             return false;
         });
         
-        function bindForm(dialog) {
-            $('form', dialog).submit(function () {
-                $.ajax({
-                    url: this.action,
-                    type: this.method,
-                    data: $(this).serialize(),
-                    success: function (result) {
-                        if (result.success) {
-                            $('#dialogDiv').modal('hide');
-                            // Refresh:
-                            // location.reload();
-                        } else {
-                            $('#dialogContent').html(result);
-                            bindForm();
-                        }
-                    }
-                });
-                return false;
-            });
-        }
     });
+    
+    function cargarGrilla() {
+        var idCaja = $("#caja").val();
+        var fechaDesde = $("#fechaDesde").val().replace(/\//g, "-");
+        var fechaHasta = $("#fechaHasta").val().replace(/\//g, "-");
+        $("#movimientos").find("tbody").load("Movimientos/Movimientos?idCaja=" + idCaja + "&fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta, function () {
+            $("#movimientos").fadeIn();
+            $("#filtros").slideUp();
+            $("#btnFiltrar").fadeIn();
+        });
+    }
+
+    function bindForm(dialog) {
+        $('form', dialog).submit(function () {
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (result) {
+                    if (result.success) {
+                        $('#dialogDiv').modal('hide');
+                        cargarGrilla();
+                    } else {
+                        $('#dialogContent').html(result);
+                        bindForm();
+                    }
+                }
+            });
+            return false;
+        });
+    }
+
 </script>

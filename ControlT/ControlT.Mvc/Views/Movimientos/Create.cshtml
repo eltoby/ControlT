@@ -8,33 +8,56 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel">Movimiento</h3>
     </div>
-    @using (Html.BeginForm("Create", "Movimientos", FormMethod.Post, new {@class = "modal-form"}))
+    @using (Html.BeginForm("Create", "Movimientos", FormMethod.Post, new {@class = "form-horizontal"}))
     {
         <div class="modal-body">
-            <div class="col-xs-3">
-                @Html.RadioButtonFor(x => x.TipoMovimiento, "Ingreso", false)
-                <label for="rbtIngreso">Ingreso</label>
+            <div class="form-group">
+                <div class="col-xs-3">
+                    <label for="Fecha" class="control-label">Fecha:</label>
+                </div>
+                <div class="col-xs-3">
+                    @Html.TextBoxFor(x => x.Fecha, new { @class = "col-xs-12 form-control"})                    
+                </div>
             </div>
-            <div class="col-xs-9">
-                @Html.RadioButtonFor(x => x.TipoMovimiento, "Egreso", true)
-                <label for="rbtEgreso">Egreso</label>
+            <div class="form-group">
+                <div class="col-xs-3">
+                    <label for="CajaID" class="control-label">Caja:</label>
+                </div>
+                <div class="col-xs-9">
+                    @Html.DropDownListFor(x => x.CajaID, (IEnumerable<SelectListItem>) ViewBag.Cajas, new { @class = "col-xs-12 form-control"})
+                </div>
             </div>
+            <div class="form-group">
+                <div class="col-xs-3">
+                    <label for="Importe" class="control-label">Importe:</label>
+                </div>
+                <div class="col-xs-9">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            @Html.TextBoxFor(x => x.Importe, new { @class = "text-right form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
 
-            <div class="col-xs-3">
-                <label for="fecha">Fecha:</label>
-            
+                        <div class="col-xs-6">
+                            @Html.RadioButtonFor(x => x.TipoMovimiento, "Ingreso", new { @id = "Ingreso", value = "Ingreso" })
+                            <label for="Ingreso" class="control-label">Ingreso</label>
+                        </div>
+                        <div class="col-xs-6">
+                            @Html.RadioButtonFor(x => x.TipoMovimiento, "Egreso", new { @id = "Egreso", value = "Egreso" })
+                            <label for="Egreso" class="control-label">Egreso</label>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-9">
-                <input id="fecha" />
+            <div class="form-group">
+                <div class="col-xs-3">
+                    <label for="Concepto" class="control-label">Concepto:</label>
+                </div>
+                <div class="col-xs-9">
+                    @Html.TextBoxFor(x => x.Concepto, null, new { @class = "col-xs-12 form-control" })
+                </div>
             </div>
-
-            <div class="col-xs-3">
-                <label for="caja">Caja</label>            
-            </div>
-            <div class="col-xs-9">
-                <select><option>Caja1</option></select>
-            </div>
-            @*Html.DropDownList("Cajas");*@
         </div>
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true" value="Cancelar">Cancelar</button>
@@ -43,7 +66,7 @@
     }
 </div>
 <script>
-    $(document).ready( function() {
-        $("#fecha").datepicker({ dateFormat: 'dd-mm-yy' });
-    })
+    $(document).ready(function () {
+        $("#Fecha").datepicker({ dateFormat: 'dd-mm-yy' });
+    });
 </script>

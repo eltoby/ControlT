@@ -55,7 +55,36 @@
 
         public ActionResult Create()
         {
+            var uow = new ControlTContext();
+
+            var cajas = uow.Cajas.Select(x => new {x.Nombre, x.CajaID}).ToArray();
+            this.ViewBag.Cajas = cajas.Select(x => new SelectListItem {Text = x.Nombre, Value = x.CajaID.ToString(CultureInfo.InvariantCulture)}).ToArray();
+
             return this.PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult Create(NuevoMovimientoModel movimiento)
+        {
+            var uow = new ControlTContext();
+
+            var importe = movimiento.Importe;
+            if (movimiento.TipoMovimiento == "Egreso")
+                importe *= -1;
+
+            var nuevo = new Movimiento
+            {
+                CajaID = movimiento.CajaID,
+                Importe = importe,
+                Concepto = movimiento.Concepto,
+                Fecha = movimiento.Fecha.ToDate(),
+                EsExtraordinario = false
+            };
+
+            uow.Movimientos.Add(nuevo);
+            uow.SaveChanges();
+            var result = new {success = true};
+            return Json(result);
         }
 
         private static void AddLineaSaldoAnteriorSiCorresponde(decimal saldoAnterior, DateTime fecDesde, ICollection<MovimientoModel> movimientosModel)
