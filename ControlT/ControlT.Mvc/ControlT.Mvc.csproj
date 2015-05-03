@@ -129,12 +129,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\CajasController.cs" />
     <Compile Include="Controllers\MovimientosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CajaModel.cs" />
     <Compile Include="Models\MovimientoModel.cs" />
     <Compile Include="Models\MovimientosModel.cs" />
     <Compile Include="Models\NuevoMovimientoModel.cs" />
@@ -1009,10 +1007,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Cajas\Index.cshtml" />
-    <Content Include="Views\Cajas\FilaCaja.cshtml" />
-    <Content Include="Views\Cajas\Detail.cshtml" />
-    <Content Include="Views\Cajas\FilaMovimiento.cshtml" />
     <Content Include="Views\Movimientos\Create.cshtml" />
     <Content Include="Views\Movimientos\Index.cshtml" />
     <Content Include="Scripts\version.json" />
