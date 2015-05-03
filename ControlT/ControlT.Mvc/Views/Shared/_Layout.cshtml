@@ -12,9 +12,12 @@
     <link rel="stylesheet" href="~/Content/themes/flat/jquery-ui-1.10.3.css"/>
     <script src="/Scripts/bootstrap.min.js"></script>
 </head>
-<body>
-    @RenderBody()
+    <body>
+        @Html.ActionLink("Movimientos", "Index", "Movimientos", new { @class = "btn btn-default", id = "btnMovimientos"})
+        @Html.ActionLink("Resumen", "Index", "Resumen", new { @class = "btn btn-default", id = "btnResumen" })
 
-    @RenderSection("scripts", required: false)
-</body>
+        @RenderBody()
+
+        @RenderSection("scripts", required: false)
+    </body>
 </html>

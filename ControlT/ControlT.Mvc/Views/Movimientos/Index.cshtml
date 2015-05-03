@@ -52,7 +52,8 @@
     <a href="Movimientos/Create" id="btnCreate" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></a>
 </div>
 <script>
-    $(document).ready(function () {        
+    $(document).ready(function () {
+        $("#btnMovimientos").addClass("active");
         $(".fecha").datepicker({ dateFormat: 'dd-mm-yy' });
 
         $("#movimientos").hide();
