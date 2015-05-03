@@ -1,7 +1,7 @@
 ﻿@model ControlT.Mvc.Models.MovimientoModel
 
 <tr>
-    <td>@Model.Fecha</td>
+    <td>@Model.Fecha.ToShortDateString()</td>
     <td>@Model.Concepto</td>
     <td>@Model.Importe</td>
     <td>@Model.Saldo</td>

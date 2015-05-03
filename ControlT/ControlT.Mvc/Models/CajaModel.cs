@@ -10,11 +10,12 @@
         {
             this.CajaID = caja.CajaID;
             this.Nombre = caja.Nombre;
-
-            var movimientosOrdenados = caja.Movimientos.OrderBy(x => x.Fecha);
-            var saldoAnterior = movimientosOrdenados.Skip(10).Sum(x => x.Importe);
-
             this.UltimosMovimientos = new List<MovimientoModel>();
+
+            if (caja.Movimientos == null) return;
+            var movimientosOrdenados = caja.Movimientos.OrderByDescending(x => x.Fecha);
+
+            var saldoAnterior = movimientosOrdenados.Skip(10).Sum(x => x.Importe);
             foreach (var movimiento in movimientosOrdenados.Take(10))
             {
                 saldoAnterior += movimiento.Importe;
