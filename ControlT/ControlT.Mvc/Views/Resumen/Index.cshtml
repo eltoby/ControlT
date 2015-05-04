@@ -1,0 +1,66 @@
+﻿@model ControlT.Mvc.Models.ResumenModel
+@{
+    ViewBag.Title = "Resumen de movimientos";
+}
+
+<div class="page-header" id="banner">
+    <div class="row">
+        <h1 class="col-xs-12">Resumen de movimientos</h1>
+    </div>
+</div>
+
+<div id="filtros">
+    <h2 class="col-xs-12">Filtros</h2>
+    <div class="col-xs-6">
+        <form class="form-horizontal">
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-xs-2 control-label">Periodo</label>
+                    <div class="col-xs-4">@Html.TextBox("fechaDesde", DateTime.Today.AddMonths(-1).ToShortDateString(), new { @class = "fecha form-control" })</div>
+                    <label class="col-xs-1 control-label"> - </label>
+                    <div class="col-xs-4">@Html.TextBox("fechaHasta", DateTime.Today.ToShortDateString(), new { @class = "fecha form-control" })</div>
+                </div>
+            </fieldset>
+            <div class="col-xs-12 text-right">
+                <button id="consultar" class="btn btn-primary">Consultar</button>
+            </div>
+        </form>
+    </div>
+</div>
+<button class="btn btn-primary col-xs-12" style="display: none" id="btnFiltrar">Filtrar <span class="glyphicon glyphicon-arrow-down"></span></button>
+<div id="datos">
+    <h2 class="col-xs-12">Datos</h2>
+    <table class="col-xs-12 table table-striped table-hover"></table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#btnResumen").addClass("active");
+        $(".fecha").datepicker({ dateFormat: 'dd-mm-yy' });
+
+        cargarGrilla();
+
+        $("#consultar").on("click", function (event) {
+            event.preventDefault();
+            $("#datos").fadeOut(function () {
+                cargarGrilla();
+            });
+        });
+
+        $("#btnFiltrar").on("click", function (event) {
+            event.preventDefault();
+            $(this).fadeOut();
+            $("#filtros").slideDown();
+        });
+    });
+
+    function cargarGrilla() {
+        var fechaDesde = $("#fechaDesde").val().replace(/\//g, "-");
+        var fechaHasta = $("#fechaHasta").val().replace(/\//g, "-");
+        $("#datos").find("table").load("Resumen/Movimientos?fechaDesde=" + fechaDesde + "&fechaHasta=" + fechaHasta, function () {
+            $("#datos").fadeIn();
+            $("#filtros").slideUp();
+            $("#btnFiltrar").fadeIn();
+        });
+    }
+</script>

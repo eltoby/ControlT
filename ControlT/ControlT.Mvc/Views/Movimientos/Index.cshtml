@@ -1,16 +1,20 @@
 ﻿@model ControlT.Mvc.Models.MovimientosModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Movimientos de Caja";
 }
 
 <div id='dialogDiv' class='modal'>
     <div class="modal-dialog" id='dialogContent'></div>
 </div>
 
-<h2 class="col-xs-12">Movimientos de Caja</h2>
+<div class="page-header" id="banner">
+    <div class="row">
+        <h1 class="col-xs-12">Movimientos de Caja</h1>
+    </div>
+</div>
 <div id="filtros">
-    <h3 class="col-xs-12">Filtros</h3>
+    <h2 class="col-xs-12">Filtros</h2>
     <div class="col-xs-6">
         <form class="form-horizontal">
             <fieldset>
@@ -33,9 +37,9 @@
 </div>
 <button class="btn btn-primary col-xs-12" style="display: none" id="btnFiltrar">Filtrar <span class="glyphicon glyphicon-arrow-down"></span></button>
 
-<h3 class="col-xs-12">Movimientos</h3>
+<h2 class="col-xs-12">Movimientos</h2>
 
-<table class="table col-xs-12" id="movimientos" style="display: none">
+<table class="table table-hover table-striped table-condensed col-xs-12" id="movimientos" style="display: none">
     <thead>
         <tr>
             <th>Fecha</th>
@@ -57,22 +61,22 @@
         $(".fecha").datepicker({ dateFormat: 'dd-mm-yy' });
 
         $("#movimientos").hide();
-        
+
         cargarGrilla();
 
-        $("#consultar").on("click", function(event) {
+        $("#consultar").on("click", function (event) {
             event.preventDefault();
             $("#movimientos").fadeOut(function () {
                 cargarGrilla();
             });
         });
-        
-        $("#btnFiltrar").on("click", function(event) {
+
+        $("#btnFiltrar").on("click", function (event) {
             event.preventDefault();
             $(this).fadeOut();
             $("#filtros").slideDown();
         });
-        
+
         $('#btnCreate').click(function () {
             $('#dialogContent').load(this.href, function () {
                 $('#dialogDiv').modal({
@@ -83,9 +87,9 @@
             });
             return false;
         });
-        
+
     });
-    
+
     function cargarGrilla() {
         var idCaja = $("#caja").val();
         var fechaDesde = $("#fechaDesde").val().replace(/\//g, "-");

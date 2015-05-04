@@ -134,6 +134,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LineaResumenModel.cs" />
     <Compile Include="Models\MovimientoModel.cs" />
     <Compile Include="Models\MovimientosModel.cs" />
     <Compile Include="Models\NuevoMovimientoModel.cs" />
@@ -1013,6 +1014,9 @@
     <Content Include="Views\Movimientos\Index.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Movimientos\Movimientos.cshtml" />
+    <Content Include="Views\Resumen\Index.cshtml" />
+    <Content Include="Views\Resumen\LineaResumen.cshtml" />
+    <Content Include="Views\Resumen\Movimientos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

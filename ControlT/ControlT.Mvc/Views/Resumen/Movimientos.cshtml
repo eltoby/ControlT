@@ -1,0 +1,24 @@
+﻿@model ControlT.Mvc.Models.ResumenModel
+
+<thead>
+    <tr>
+        <th>Caja</th>
+        <th>Ingresos</th>
+        <th>Egresos</th>
+        <th>Total</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var linea in Model.Lineas)
+    {
+        Html.RenderPartial("LineaResumen", linea);
+    }
+</tbody>
+<tfoot>
+    <tr>
+        <th>Total</th>
+        <th>@Model.TotalIngresos</th>
+        <th>@Model.TotalEgresos</th>
+        <th>@Model.Saldo</th>
+    </tr>
+</tfoot>

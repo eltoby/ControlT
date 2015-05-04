@@ -13,11 +13,34 @@
     <script src="/Scripts/bootstrap.min.js"></script>
 </head>
     <body>
-        @Html.ActionLink("Movimientos", "Index", "Movimientos", new { @class = "btn btn-default", id = "btnMovimientos"})
-        @Html.ActionLink("Resumen", "Index", "Resumen", new { @class = "btn btn-default", id = "btnResumen" })
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a href="../" class="navbar-brand">ControlT</a>
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-main">
+                    <ul class="nav navbar-nav">
+                        <li id="btnMovimientos">
+                            @Html.ActionLink("Movimientos", "Index", "Movimientos")
+                        </li>
+                        <li id="btnResumen">
+                            @Html.ActionLink("Resumen", "Index", "Resumen")
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-        @RenderBody()
 
-        @RenderSection("scripts", required: false)
-    </body>
+        <div class="container">
+            @RenderBody()
+
+            @RenderSection("scripts", required: false)
+        </div>
+</body>
 </html>
