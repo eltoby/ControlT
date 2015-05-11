@@ -1,0 +1,15 @@
+﻿@model ControlT.Mvc.Models.CajasModel
+
+<thead>
+    <tr>
+        <th>Caja</th>
+    </tr>
+</thead>
+<tbody>
+    @foreach (var caja in @Model.Cajas)
+    {
+        <tr>
+            <td>@caja.Nombre</td>
+        </tr>
+    }
+</tbody>           

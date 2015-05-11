@@ -55,6 +55,7 @@
 <div class="col-xs-12 text-right">
     <a href="Movimientos/Create" id="btnCreate" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></a>
 </div>
+<script src="~/Scripts/modal.js"></script>
 <script>
     $(document).ready(function () {
         $("#btnMovimientos").addClass("active");
@@ -77,17 +78,7 @@
             $("#filtros").slideDown();
         });
 
-        $('#btnCreate').click(function () {
-            $('#dialogContent').load(this.href, function () {
-                $('#dialogDiv').modal({
-                    backdrop: 'static',
-                    keyboard: true
-                }, 'show');
-                bindForm(this);
-            });
-            return false;
-        });
-
+        btnModal('btnCreate', cargarGrilla);
     });
 
     function cargarGrilla() {
@@ -100,25 +91,4 @@
             $("#btnFiltrar").fadeIn();
         });
     }
-
-    function bindForm(dialog) {
-        $('form', dialog).submit(function () {
-            $.ajax({
-                url: this.action,
-                type: this.method,
-                data: $(this).serialize(),
-                success: function (result) {
-                    if (result.success) {
-                        $('#dialogDiv').modal('hide');
-                        cargarGrilla();
-                    } else {
-                        $('#dialogContent').html(result);
-                        bindForm();
-                    }
-                }
-            });
-            return false;
-        });
-    }
-
 </script>

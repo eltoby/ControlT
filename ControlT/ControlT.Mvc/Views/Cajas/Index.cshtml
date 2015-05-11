@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Cajas";
+}
+
+<div id='dialogDiv' class='modal'>
+    <div class="modal-dialog" id='dialogContent'></div>
+</div>
+
+<div class="page-header" id="banner">
+    <div class="row">
+        <h1 class="col-xs-12">Cajas</h1>
+    </div>
+</div>
+
+<div id="datos">
+    <table class="col-xs-12 table table-striped table-hover"></table>
+</div>
+<div class="col-xs-12 text-right">
+    <a href="Cajas/Create" id="btnCreate" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span></a>
+</div>
+<script src="~/Scripts/modal.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#btnCajas").addClass("active");
+        cargarGrilla();
+        btnModal('btnCreate', cargarGrilla);
+    });
+
+    function cargarGrilla() {
+        $("#datos").find("table").load("Cajas/Cajas", function () {
+            $("#datos").fadeIn();
+        });
+    }    
+    
+
+</script>

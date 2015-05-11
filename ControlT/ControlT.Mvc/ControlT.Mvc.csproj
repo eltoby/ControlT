@@ -129,11 +129,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CajasController.cs" />
     <Compile Include="Controllers\MovimientosController.cs" />
     <Compile Include="Controllers\ResumenController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CajaModel.cs" />
+    <Compile Include="Models\CajasModel.cs" />
     <Compile Include="Models\LineaResumenModel.cs" />
     <Compile Include="Models\MovimientoModel.cs" />
     <Compile Include="Models\MovimientosModel.cs" />
@@ -997,6 +1000,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
+    <Content Include="Scripts\modal.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -1017,6 +1021,9 @@
     <Content Include="Views\Resumen\Index.cshtml" />
     <Content Include="Views\Resumen\LineaResumen.cshtml" />
     <Content Include="Views\Resumen\Movimientos.cshtml" />
+    <Content Include="Views\Cajas\Index.cshtml" />
+    <Content Include="Views\Cajas\Cajas.cshtml" />
+    <Content Include="Views\Cajas\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
